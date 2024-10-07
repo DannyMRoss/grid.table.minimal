@@ -93,7 +93,7 @@ invisible(dev.off()) # clear device
 ```
 
 ### draw borders over the gtable
-```{r dpi=300}
+```{r borderdraw}
 grid.draw(g)
 grid.borders(title = "Minimal Table Example")
 ```
@@ -103,12 +103,12 @@ invisible(dev.off()) # clear device
 ```
 
 ### grid.table.minimal() and grid.borders() rely on global options that are set to default values by the below function.
-```{r}
+```{r borderdefaults}
 set_border_defaults(show = TRUE)
 ```
 
 ### example save to pdf usage
-```{r}
+```{r savetable}
 set_border_defaults(plot.width = 8.5, plot.height = 11, fontsize=16)
 pdf("man/figures/table1.pdf", width = getOption("plot.width"), height = getOption("plot.height")) # start pdf stream
 grid.slip(label = "Ex. 1") # draws a slip sheet
@@ -208,7 +208,7 @@ invisible(dev.off()) # clear device
 ```
 
 ### Add titles, caption, borders and write to pdf
-```{r}
+```{r saveplot}
 pdf("man/figures/plot1.pdf", width=getOption("plot.width"), height=getOption("plot.height"))
 grid.draw(p)
 grid.borders(

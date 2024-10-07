@@ -48,17 +48,17 @@ setnames(DT, rep(c("Length","Width"),2))
 print(DT)
 #>          Length      Width      Length       Width
 #>          <char>     <char>      <char>      <char>
-#>  1:         5.1        3.8         1.5         0.3
-#>  2:         5.7        2.6         3.5           1
-#>  3:         5.8        2.7         5.1         1.9
-#>  4:         4.5        2.3         1.3         0.3
-#>  5:         5.9          3         5.1         1.8
-#>  6:         4.8          3         1.4         0.3
-#>  7:         6.3        2.5           5         1.9
-#>  8:         5.1        3.7         1.5         0.4
-#>  9:         5.4        3.4         1.7         0.2
-#> 10:         6.1        2.9         4.7         1.4
-#> 11: 5.47 (0.59) 2.99 (0.5) 3.08 (1.75) 0.95 (0.74)
+#>  1:         6.3        2.7         4.9         1.8
+#>  2:           5          2         3.5           1
+#>  3:         4.6        3.4         1.4         0.3
+#>  4:         7.4        2.8         6.1         1.9
+#>  5:         4.9        3.1         1.5         0.1
+#>  6:         6.7        3.3         5.7         2.5
+#>  7:         5.7        2.8         4.1         1.3
+#>  8:         5.6          3         4.5         1.5
+#>  9:         6.4        2.9         4.3         1.3
+#> 10:         6.7        2.5         5.8         1.8
+#> 11: 5.93 (0.92) 2.85 (0.4) 4.18 (1.65) 1.35 (0.73)
 ```
 
 ## Example 1
@@ -96,7 +96,7 @@ grid.draw(g)
 grid.borders(title = "Minimal Table Example")
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" style="border: 1px solid darkgray;" />
+<img src="man/figures/README-borderdraw-1.png" width="100%" style="border: 1px solid darkgray;" />
 
 ### grid.table.minimal() and grid.borders() rely on global options that are set to default values by the below function.
 
