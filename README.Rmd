@@ -7,8 +7,11 @@ output: github_document
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  warning = FALSE,
+  message = FALSE,
   comment = "#>",
   fig.path = "man/figures/README-",
+  dpi = 400,
   out.width = "100%",
   out.extra = 'style="border: 1px solid darkgray;"'
 )
@@ -90,7 +93,7 @@ invisible(dev.off()) # clear device
 ```
 
 ### draw borders over the gtable
-```{r}
+```{r dpi=300}
 grid.draw(g)
 grid.borders(title = "Minimal Table Example")
 ```

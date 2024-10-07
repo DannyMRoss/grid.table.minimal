@@ -26,38 +26,12 @@ This is a basic example which shows you how to solve a common problem:
 ``` r
 library(grid.table.minimal)
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 library(ggplot2)
 library(data.table)
-#> 
-#> Attaching package: 'data.table'
-#> The following objects are masked from 'package:dplyr':
-#> 
-#>     between, first, last
 library(extrafont)
-#> Registering fonts with R
 library(showtext)
-#> Loading required package: sysfonts
-#> Loading required package: showtextdb
-#> 
-#> Attaching package: 'showtextdb'
-#> The following object is masked from 'package:extrafont':
-#> 
-#>     font_install
 library(grid)
 library(gridExtra)
-#> 
-#> Attaching package: 'gridExtra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     combine
 library(gtable)
 fonts <- c("/fonts/ttf")
 set_border_defaults()
@@ -72,19 +46,19 @@ DT <- rbind(DT,
             DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
 setnames(DT, rep(c("Length","Width"),2))
 print(DT)
-#>          Length       Width      Length       Width
-#>          <char>      <char>      <char>      <char>
-#>  1:           5           3         1.6         0.2
-#>  2:         6.7         2.5         5.8         1.8
-#>  3:         6.4         3.2         4.5         1.5
-#>  4:         4.9           3         1.4         0.2
-#>  5:         5.1         3.5         1.4         0.2
-#>  6:         6.7         3.3         5.7         2.5
-#>  7:         4.6         3.6           1         0.2
-#>  8:         7.7           3         6.1         2.3
-#>  9:         5.1         3.5         1.4         0.3
-#> 10:         6.1         2.6         5.6         1.4
-#> 11: 5.83 (1.03) 3.12 (0.37) 3.45 (2.25) 1.06 (0.94)
+#>          Length      Width      Length       Width
+#>          <char>     <char>      <char>      <char>
+#>  1:         5.1        3.8         1.5         0.3
+#>  2:         5.7        2.6         3.5           1
+#>  3:         5.8        2.7         5.1         1.9
+#>  4:         4.5        2.3         1.3         0.3
+#>  5:         5.9          3         5.1         1.8
+#>  6:         4.8          3         1.4         0.3
+#>  7:         6.3        2.5           5         1.9
+#>  8:         5.1        3.7         1.5         0.4
+#>  9:         5.4        3.4         1.7         0.2
+#> 10:         6.1        2.9         4.7         1.4
+#> 11: 5.47 (0.59) 2.99 (0.5) 3.08 (1.75) 0.95 (0.74)
 ```
 
 ## Example 1
@@ -266,12 +240,6 @@ set_border_defaults()
 p <- ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + 
   geom_point() + 
   theme_borders()
-#> Warning: A numeric `legend.position` argument in `theme()` was deprecated in ggplot2
-#> 3.5.0.
-#> ℹ Please use the `legend.position.inside` argument of `theme()` instead.
-#> This warning is displayed once every 8 hours.
-#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was
-#> generated.
 grid.draw(p)
 ```
 
