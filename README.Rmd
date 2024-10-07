@@ -128,6 +128,7 @@ set_border_defaults(border.fontsize=10, fontsize=8)
 
 ## Example 2
 ### gtables can be easily and flexibly formatted with the below functions
+These functions extend those presented in [gridExtra/vignettes/tableGrob.html](https://cran.r-project.org/web/packages/gridExtra/vignettes/tableGrob.html) 
 ```{r example2}
 # use grid.table.minimal() to convert DT to gtable object w/ minimal styling applied
 g <- grid.table.minimal(DT)

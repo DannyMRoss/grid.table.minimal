@@ -2,7 +2,7 @@ Package: grid.table.minimal
 Title: Quickly and Minimally Format Grid Graphics
 Version: 0.0.0.9000
 Authors@R: 
-    person("Daniel", "Ross")
+    person("Daniel", "Ross", , "dannymross@gmail.com", role = c("aut", "cre"))
 Description: Provides functions to quickly and minimally format and add borders to grid based tables and plots
 License: MIT + file LICENSE
 Encoding: UTF-8

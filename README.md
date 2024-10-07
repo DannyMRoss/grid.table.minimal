@@ -47,17 +47,17 @@ setnames(DT, rep(c("Length","Width"),2))
 print(DT)
 #>          Length       Width      Length       Width
 #>          <char>      <char>      <char>      <char>
-#>  1:         4.6         3.6           1         0.2
-#>  2:         5.5         3.5         1.3         0.2
-#>  3:         4.9         2.4         3.3           1
-#>  4:           6         2.9         4.5         1.5
-#>  5:         6.9         3.1         4.9         1.5
-#>  6:         6.2         2.8         4.8         1.8
-#>  7:         6.1         2.6         5.6         1.4
-#>  8:         4.7         3.2         1.6         0.2
-#>  9:           5         3.2         1.2         0.2
-#> 10:         5.4         3.9         1.3         0.4
-#> 11: 5.53 (0.75) 3.12 (0.46) 2.95 (1.85) 0.84 (0.66)
+#>  1:         6.2         3.4         5.4         2.3
+#>  2:         6.7         3.1         4.7         1.5
+#>  3:         6.4         2.9         4.3         1.3
+#>  4:         6.8         2.8         4.8         1.4
+#>  5:         7.7         2.8         6.7           2
+#>  6:         6.3         2.5           5         1.9
+#>  7:         5.6         2.5         3.9         1.1
+#>  8:         5.9           3         5.1         1.8
+#>  9:         7.7         2.6         6.9         2.3
+#> 10:         4.6         3.6           1         0.2
+#> 11: 6.39 (0.93) 2.92 (0.37) 4.78 (1.63) 1.58 (0.63)
 ```
 
 ## Example 1
@@ -169,6 +169,9 @@ invisible(dev.off()) # close pdf stream
 ## Example 2
 
 ### gtables can be easily and flexibly formatted with the below functions
+
+These functions extend those presented in
+[gridExtra/vignettes/tableGrob.html](https://cran.r-project.org/web/packages/gridExtra/vignettes/tableGrob.html)
 
 ``` r
 # use grid.table.minimal() to convert DT to gtable object w/ minimal styling applied
