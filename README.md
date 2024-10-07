@@ -45,19 +45,19 @@ DT <- rbind(DT,
             DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
 setnames(DT, rep(c("Length","Width"),2))
 print(DT)
-#>          Length       Width      Length       Width
-#>          <char>      <char>      <char>      <char>
-#>  1:         6.2         3.4         5.4         2.3
-#>  2:         6.7         3.1         4.7         1.5
-#>  3:         6.4         2.9         4.3         1.3
-#>  4:         6.8         2.8         4.8         1.4
-#>  5:         7.7         2.8         6.7           2
-#>  6:         6.3         2.5           5         1.9
-#>  7:         5.6         2.5         3.9         1.1
-#>  8:         5.9           3         5.1         1.8
-#>  9:         7.7         2.6         6.9         2.3
-#> 10:         4.6         3.6           1         0.2
-#> 11: 6.39 (0.93) 2.92 (0.37) 4.78 (1.63) 1.58 (0.63)
+#>     Length     Width      Length       Width
+#>     <char>    <char>      <char>      <char>
+#>  1:    7.7         3         6.1         2.3
+#>  2:    7.3       2.9         6.3         1.8
+#>  3:    6.2       2.8         4.8         1.8
+#>  4:    5.9         3         4.2         1.5
+#>  5:    5.9       3.2         4.8         1.8
+#>  6:    4.6       3.6           1         0.2
+#>  7:    4.9       3.1         1.5         0.1
+#>  8:    5.4       3.9         1.3         0.4
+#>  9:    5.4         3         4.5         1.5
+#> 10:    6.7       2.5         5.8         1.8
+#> 11:  6 (1) 3.1 (0.4) 4.03 (2.03) 1.32 (0.78)
 ```
 
 ## Example 1
@@ -236,25 +236,24 @@ labels to be added with `grid.borders()`
 ``` r
 set_border_defaults()
 p <- ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + 
-  geom_point() + 
+  geom_point() + labs(color="") +
   theme_borders()
 grid.draw(p)
 ```
 
 <img src="man/figures/README-pex1-1.png" width="100%" style="border: 1px solid darkgray;" />
 
-### Add titles, caption, borders and write to pdf
+### Add titles, caption, and borders
 
 ``` r
-pdf("man/figures/plot1.pdf", width=getOption("plot.width"), height=getOption("plot.height"))
 grid.draw(p)
 grid.borders(
+  titlebox.draw = TRUE,
   title = "Title",
   subtitle = "Subtitle",
-  caption = list("Caption" = c("[1]")),
+  caption = list("Caption" = c("[1]", "[2]")),
   bottom = c(l="", c="", r="Ex. 1")
 )
-invisible(dev.off())
 ```
 
-[man/figures/plot1.pdf](man/figures/plot1.pdf)
+<img src="man/figures/README-pex1tcb-1.png" width="100%" style="border: 1px solid darkgray;" />

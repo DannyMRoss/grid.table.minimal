@@ -144,6 +144,7 @@ grid.slip <- function(label = "",
 #' @param bottom
 #' @param left
 #' @param right
+#' @param titlebox
 #' @param title
 #' @param subtitle
 #' @param caption
@@ -161,6 +162,7 @@ grid.borders <- function(
     bottom = c(l = "", c = "", r = ""),
     left = c(b = "", c = "", t = ""),
     right = c(b = "", c = "", t = ""),
+    titlebox.draw = TRUE,
     title = NULL,
     subtitle = NULL,
     caption = NULL,
@@ -214,7 +216,7 @@ grid.borders <- function(
   r.x.just <- rev(l.x.just)
   lr.y.just <- "top"
 
-  grid.draw(titlebox)
+  if(titlebox.draw) grid.draw(titlebox)
   grid.draw(borderbox)
   for (i in seq_along(top)){
     grid.draw(textGrob(label = top[[i]],

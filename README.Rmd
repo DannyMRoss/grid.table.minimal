@@ -195,7 +195,7 @@ Space above the plot is preserved for the title, subtitle, and caption labels to
 ```{r pex1, fig.height=8.5, fig.width=11}
 set_border_defaults()
 p <- ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + 
-  geom_point() + 
+  geom_point() + labs(color="") +
   theme_borders()
 grid.draw(p)
 ```
@@ -204,23 +204,16 @@ grid.draw(p)
 invisible(dev.off()) # clear device
 ```
 
-### Add titles, caption, borders and write to pdf
-```{r saveplot}
-pdf("man/figures/plot1.pdf", width=getOption("plot.width"), height=getOption("plot.height"))
+### Add titles, caption, and borders
+```{r pex1tcb, fig.dim = c(11,8.5)}
 grid.draw(p)
 grid.borders(
+  titlebox.draw = TRUE,
   title = "Title",
   subtitle = "Subtitle",
-  caption = list("Caption" = c("[1]")),
+  caption = list("Caption" = c("[1]", "[2]")),
   bottom = c(l="", c="", r="Ex. 1")
 )
-invisible(dev.off())
 ```
-
-```{r include=FALSE}
-embedFonts("man/figures/plot1.pdf", outfile = "man/figures/plot1.pdf", fontpaths = fonts)
-```
-
-[man/figures/plot1.pdf](man/figures/plot1.pdf)
 
 
