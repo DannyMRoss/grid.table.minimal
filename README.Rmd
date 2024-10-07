@@ -189,9 +189,6 @@ invisible(dev.off()) # clear device
 ```
 
 # theme_borders()
-```{r}
-source("R/theme_borders.R")
-```
 ### Use ggplot theme_borders() to add minimalist formatting to ggplots and set margins compatible with grid.borders()
 Space above the plot is preserved for the title, subtitle, and caption labels to be added with `grid.borders()`
 ```{r pex1, fig.height=8.5, fig.width=11}

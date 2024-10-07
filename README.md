@@ -45,19 +45,19 @@ DT <- rbind(DT,
             DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
 setnames(DT, rep(c("Length","Width"),2))
 print(DT)
-#>         Length       Width      Length       Width
-#>         <char>      <char>      <char>      <char>
-#>  1:        4.4           3         1.3         0.2
-#>  2:        5.5         3.5         1.3         0.2
-#>  3:          5         2.3         3.3           1
-#>  4:        4.6         3.1         1.5         0.2
-#>  5:        5.7         2.8         4.5         1.3
-#>  6:        5.6         2.8         4.9           2
-#>  7:        6.3         3.4         5.6         2.4
-#>  8:        6.7           3           5         1.7
-#>  9:        6.8           3         5.5         2.1
-#> 10:        5.4         3.4         1.7         0.2
-#> 11: 5.6 (0.82) 3.03 (0.36) 3.46 (1.84) 1.13 (0.89)
+#>          Length       Width      Length       Width
+#>          <char>      <char>      <char>      <char>
+#>  1:         4.6         3.6           1         0.2
+#>  2:         5.5         3.5         1.3         0.2
+#>  3:         4.9         2.4         3.3           1
+#>  4:           6         2.9         4.5         1.5
+#>  5:         6.9         3.1         4.9         1.5
+#>  6:         6.2         2.8         4.8         1.8
+#>  7:         6.1         2.6         5.6         1.4
+#>  8:         4.7         3.2         1.6         0.2
+#>  9:           5         3.2         1.2         0.2
+#> 10:         5.4         3.9         1.3         0.4
+#> 11: 5.53 (0.75) 3.12 (0.46) 2.95 (1.85) 0.84 (0.66)
 ```
 
 ## Example 1
@@ -224,10 +224,6 @@ grid.borders(title = "Minimal Table",
 <img src="man/figures/README-example3-1.png" width="100%" style="border: 1px solid darkgray;" />
 
 # theme_borders()
-
-``` r
-source("R/theme_borders.R")
-```
 
 ### Use ggplot theme_borders() to add minimalist formatting to ggplots and set margins compatible with grid.borders()
 
