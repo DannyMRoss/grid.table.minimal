@@ -47,11 +47,12 @@ library(showtext)
 library(grid)
 library(gridExtra)
 library(gtable)
-fonts <- c("/fonts/ttf")
 set_border_defaults()
+loadfonts()
 ```
 
 ```{r include=F}
+fonts <- c(paste0(getwd(),"/fonts/ttf"))
 options("fontsize" = 8)
 options("border.fontsize" = 10)
 iris <- copy(iris)

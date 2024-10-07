@@ -33,8 +33,8 @@ library(showtext)
 library(grid)
 library(gridExtra)
 library(gtable)
-fonts <- c("/fonts/ttf")
 set_border_defaults()
+loadfonts()
 ```
 
 #### summary table for examples
@@ -46,19 +46,19 @@ DT <- rbind(DT,
             DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
 setnames(DT, rep(c("Length","Width"),2))
 print(DT)
-#>          Length      Width      Length       Width
-#>          <char>     <char>      <char>      <char>
-#>  1:         6.3        2.7         4.9         1.8
-#>  2:           5          2         3.5           1
-#>  3:         4.6        3.4         1.4         0.3
-#>  4:         7.4        2.8         6.1         1.9
-#>  5:         4.9        3.1         1.5         0.1
-#>  6:         6.7        3.3         5.7         2.5
-#>  7:         5.7        2.8         4.1         1.3
-#>  8:         5.6          3         4.5         1.5
-#>  9:         6.4        2.9         4.3         1.3
-#> 10:         6.7        2.5         5.8         1.8
-#> 11: 5.93 (0.92) 2.85 (0.4) 4.18 (1.65) 1.35 (0.73)
+#>          Length       Width      Length       Width
+#>          <char>      <char>      <char>      <char>
+#>  1:         7.2         3.6         6.1         2.5
+#>  2:         5.8         2.6           4         1.2
+#>  3:         5.6         2.5         3.9         1.1
+#>  4:           6         3.4         4.5         1.6
+#>  5:         6.7           3         5.2         2.3
+#>  6:         6.9         3.1         4.9         1.5
+#>  7:         6.7         3.3         5.7         2.1
+#>  8:         5.1         3.5         1.4         0.3
+#>  9:         5.1         3.8         1.6         0.2
+#> 10:         6.4         2.7         5.3         1.9
+#> 11: 6.15 (0.74) 3.15 (0.45) 4.26 (1.61) 1.47 (0.78)
 ```
 
 ## Example 1
