@@ -22,7 +22,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of grid.table.minimal is to ...
+The goal of grid.table.minimal is to quickly format grid graphics based tables and plots.
 
 ## Installation
 
@@ -33,9 +33,7 @@ You can install the development version of grid.table.minimal from [GitHub](http
 pak::pak("DannyMRoss/grid.table.minimal")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Examples
 
 ```{r example}
 library(grid.table.minimal)

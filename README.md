@@ -7,7 +7,8 @@
 
 <!-- badges: end -->
 
-The goal of grid.table.minimal is to …
+The goal of grid.table.minimal is to quickly format grid graphics based
+tables and plots.
 
 ## Installation
 
@@ -19,9 +20,7 @@ You can install the development version of grid.table.minimal from
 pak::pak("DannyMRoss/grid.table.minimal")
 ```
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
+## Examples
 
 ``` r
 library(grid.table.minimal)
@@ -46,19 +45,19 @@ DT <- rbind(DT,
             DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
 setnames(DT, rep(c("Length","Width"),2))
 print(DT)
-#>          Length       Width      Length       Width
-#>          <char>      <char>      <char>      <char>
-#>  1:         7.2         3.6         6.1         2.5
-#>  2:         5.8         2.6           4         1.2
-#>  3:         5.6         2.5         3.9         1.1
-#>  4:           6         3.4         4.5         1.6
-#>  5:         6.7           3         5.2         2.3
-#>  6:         6.9         3.1         4.9         1.5
-#>  7:         6.7         3.3         5.7         2.1
-#>  8:         5.1         3.5         1.4         0.3
-#>  9:         5.1         3.8         1.6         0.2
-#> 10:         6.4         2.7         5.3         1.9
-#> 11: 6.15 (0.74) 3.15 (0.45) 4.26 (1.61) 1.47 (0.78)
+#>         Length       Width      Length       Width
+#>         <char>      <char>      <char>      <char>
+#>  1:        4.4           3         1.3         0.2
+#>  2:        5.5         3.5         1.3         0.2
+#>  3:          5         2.3         3.3           1
+#>  4:        4.6         3.1         1.5         0.2
+#>  5:        5.7         2.8         4.5         1.3
+#>  6:        5.6         2.8         4.9           2
+#>  7:        6.3         3.4         5.6         2.4
+#>  8:        6.7           3           5         1.7
+#>  9:        6.8           3         5.5         2.1
+#> 10:        5.4         3.4         1.7         0.2
+#> 11: 5.6 (0.82) 3.03 (0.36) 3.46 (1.84) 1.13 (0.89)
 ```
 
 ## Example 1
