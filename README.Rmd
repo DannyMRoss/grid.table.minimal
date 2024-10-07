@@ -36,21 +36,191 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(grid.table.minimal)
+library(dplyr)
+library(ggplot2)
+library(data.table)
+library(extrafont)
+library(showtext)
+library(grid)
+library(gridExtra)
+library(gtable)
 fonts <- c("/fonts/ttf")
+set_border_defaults()
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
-
-```{r cars}
-summary(cars)
+```{r include=F}
+options("fontsize" = 8)
+options("border.fontsize" = 10)
+iris <- copy(iris)
 ```
 
-You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
-
-You can also embed plots, for example:
-
-```{r pressure, echo = FALSE}
-plot(pressure)
+#### summary table for examples
+```{r tablesetup}
+setDT(iris)
+DT <- iris[sample(.N, 10), 1:4]
+DT <- rbind(DT, 
+            DT[, lapply(.SD, function(x) paste0(mean(x), " (",round(sd(x),2),")"))])
+setnames(DT, rep(c("Length","Width"),2))
+print(DT)
 ```
 
-In that case, don't forget to commit and push the resulting figure files, so they display on GitHub and CRAN.
+## Example 1
+### grid.table.minimal() converts a data.frame to a gtable object with minimalist formatting applied. The gtable can then be drawn to the graphics device with grid.draw()
+```{r example1}
+g <- grid.table.minimal(DT)
+grid.draw(g)
+```
+
+### grid.borders() draws borders, title, subtitle, caption, and watermark to the graphics device
+```{r exampleborders}
+grid.borders(
+  bottom = c(l="BOTTOM LEFT", c="BOTTOM CENTER", r="BOTTOM RIGHT"), 
+  top = c(l="TOP LEFT", c="TOP CENTER", r="TOP RIGHT"),
+  left = c(b="LEFT BOTTOM", c="LEFT CENTER", t="LEFT TOP"),
+  right = c(b="RIGHT BOTTOM", c="RIGHT CENTER", t="RIGHT TOP"),
+  title = "Title",
+  subtitle = "Subtitle",
+  caption = list("Caption" = c("[1]")),
+  watermark = "Watermark"
+)
+```
+
+```{r include=FALSE}
+invisible(dev.off()) # clear device
+```
+
+### draw borders over the gtable
+```{r}
+grid.draw(g)
+grid.borders(title = "Minimal Table Example")
+```
+
+```{r include=FALSE}
+invisible(dev.off()) # clear device
+```
+
+### grid.table.minimal() and grid.borders() rely on global options that are set to default values by the below function.
+```{r}
+set_border_defaults(show = TRUE)
+```
+
+### example save to pdf usage
+```{r}
+set_border_defaults(plot.width = 8.5, plot.height = 11, fontsize=16)
+pdf("man/figures/table1.pdf", width = getOption("plot.width"), height = getOption("plot.height")) # start pdf stream
+grid.slip(label = "Ex. 1") # draws a slip sheet
+grid.draw(grid.table.minimal(DT))
+grid.borders(title = "Minimal Table Example", bottom = c(l="",c="",r="Ex. 1"))
+invisible(dev.off()) # close pdf stream
+```
+
+```{r include=FALSE}
+embedFonts("man/figures/table1.pdf", outfile = "man/figures/table1.pdf", fontpaths = fonts) # in case user does not have fonts installed
+```
+
+[man/figures/table1.pdf](man/figures/table1.pdf)
+
+```{r include=F}
+set_border_defaults(border.fontsize=10, fontsize=8)
+```
+
+## Example 2
+### gtables can be easily and flexibly formatted with the below functions
+```{r example2}
+# use grid.table.minimal() to convert DT to gtable object w/ minimal styling applied
+g <- grid.table.minimal(DT)
+# add column header spans with gtable_add_cspan()
+g <- gtable_add_cspan(g, text="Sepal", r=2) # defaults to adding above 
+g <- gtable_add_cspan(g, text="Petal", t=1, b=1, l=3, r=4) # specify t=b=1 to add to the existing top row
+g <- gtable_add_cspan(g, text="Iris Random Sample (N = 10)")
+# add horizontal lines with gtable_add_hline()
+g <- gtable_add_hline(g, rows = nrow(g)-1) # adds hline(s) below row(s)
+# format rows/cols/cells with grid.table.gp()
+g <- grid.table.gp(g, rows = nrow(g), bold=T) # bold quickly with bold parameter
+# individual cell formatting
+g <- grid.table.gp(g, 
+                   cols = c(1,3), 
+                   rows = nrow(g), 
+                   union = FALSE, # only apply to intersection of cols/rows
+                   name = 'core-bg', # modify background grobs
+                   gp_params = list(fill = "#DEEBF7"))
+# draw gtable to device
+grid.draw(g)
+# draw borders, titles, caption, to device
+grid.borders(title = "Minimal Table Example",
+             subtitle = "flexible formatting",
+             caption = list("Notes" = c("Summary row is the sample mean (sd).")),
+             bottom = c(l="",c="",r="Ex. 2"), # add bottom margin text
+             top = c(l = "", c="", r="")) # add top margin text
+```
+
+```{r include=FALSE}
+invisible(dev.off()) # clear device
+```
+
+## Example 3
+```{r include=F}
+cl <- t(as.data.table(paste0("[",LETTERS[1:4],"]")))
+colnames(cl) <- names(DT)
+DT <- rbind(cl, DT)
+```
+### shortcuts are available to white-on-black the column headers
+```{r example3}
+set_border_defaults(default.fontfamily="Arial", fontsize=8, border.fontsize=10) # change default font and fontsize
+g <- grid.table.minimal(DT, 
+                        width_pct = .5, # pct of page that the table will take up
+                        black.heading = TRUE) # black heading option
+g <- gtable_add_cspan(g, text="Sepal", r=2, black = TRUE) 
+g <- gtable_add_cspan(g, text="Petal", t=1, b=1, l=3, r=4, black = TRUE)
+g <- gtable_add_hline(g, rows = nrow(g)-1)
+g <- grid.table.gp(g, rows = nrow(g), bold=T)
+grid.draw(g)
+grid.borders(title = "Minimal Table",
+             subtitle = "Black Headers",
+             caption = list("Notes & Sources:" = c("Summary row is the sample mean (sd).")),
+             bottom = c(l="",c="",r="Ex. 3"),
+             top = c(l = "", c="", r=""))
+```
+
+```{r include=FALSE}
+invisible(dev.off()) # clear device
+```
+
+# theme_borders()
+```{r}
+source("R/theme_borders.R")
+```
+### Use ggplot theme_borders() to add minimalist formatting to ggplots and set margins compatible with grid.borders()
+Space above the plot is preserved for the title, subtitle, and caption labels to be added with `grid.borders()`
+```{r pex1, fig.height=8.5, fig.width=11}
+set_border_defaults()
+p <- ggplot(iris, aes(x=Sepal.Width, y=Sepal.Length, color=Species)) + 
+  geom_point() + 
+  theme_borders()
+grid.draw(p)
+```
+
+```{r include=FALSE}
+invisible(dev.off()) # clear device
+```
+
+### Add titles, caption, borders and write to pdf
+```{r}
+pdf("man/figures/plot1.pdf", width=getOption("plot.width"), height=getOption("plot.height"))
+grid.draw(p)
+grid.borders(
+  title = "Title",
+  subtitle = "Subtitle",
+  caption = list("Caption" = c("[1]")),
+  bottom = c(l="", c="", r="Ex. 1")
+)
+invisible(dev.off())
+```
+
+```{r include=FALSE}
+embedFonts("man/figures/plot1.pdf", outfile = "man/figures/plot1.pdf", fontpaths = fonts)
+```
+
+[man/figures/plot1.pdf](man/figures/plot1.pdf)
+
+

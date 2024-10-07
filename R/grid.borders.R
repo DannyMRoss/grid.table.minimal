@@ -1,3 +1,20 @@
+#' Title
+#'
+#' @param label
+#' @param draw
+#' @param x
+#' @param y
+#' @param rot
+#' @param fontsize
+#' @param cex
+#' @param alpha
+#' @param color
+#' @param fontface
+#'
+#' @return
+#' @export
+#'
+#' @examples
 grid.watermark <- function(label = "",
                            draw = TRUE,
                            x = 0.5,
@@ -9,15 +26,15 @@ grid.watermark <- function(label = "",
                            color = "grey",
                            fontface = "bold"
 ){
-  
+
   fontfamily <- getOption("default.fontfamily")
   fontsize <- getOption("fontsize", 12)
   watermarktext <- textGrob(label = label,
-                            x = x, 
-                            y = y, 
+                            x = x,
+                            y = y,
                             just = c("center","center"),
                             rot = rot,
-                            gp = gpar(color = color, 
+                            gp = gpar(color = color,
                                       cex = cex,
                                       fontsize = fontsize,
                                       fontfamily = fontfamily,
@@ -29,6 +46,20 @@ grid.watermark <- function(label = "",
   }
 }
 
+#' Title
+#'
+#' @param label
+#' @param caption
+#' @param y
+#' @param nudge_x
+#' @param nudge_y
+#' @param sep
+#' @param cex
+#'
+#' @return
+#' @export
+#'
+#' @examples
 grid.caption <- function(label = "Notes & Sources:",
                          caption = c(),
                          y = NULL,
@@ -36,7 +67,7 @@ grid.caption <- function(label = "Notes & Sources:",
                          nudge_y = NULL,
                          sep = 0.02,
                          cex = 5/6){
-  
+
   border.margin <- getOption("border.margin", 0.05)
   fontsize <- getOption("fontsize", 12)
   fontfamily <- getOption("default.fontfamily")
@@ -45,28 +76,42 @@ grid.caption <- function(label = "Notes & Sources:",
   }else{
     y <- (nudge_y + sep * (length(caption) + 0.5))
   }
-  
+
   if (!is.null(label)){
-    grid.draw(textGrob(label = bquote(bold(underline(.(label)))), 
+    grid.draw(textGrob(label = bquote(bold(underline(.(label)))),
                        x = 0.5 + nudge_x,
-                       y = y, 
-                       just = c("center","bottom"), 
+                       y = y,
+                       just = c("center","bottom"),
                        gp = gpar(fontsize = fontsize,
                                  cex = cex,
                                  fontfamily = fontfamily)))
   }
-  
+
   for (i in seq_along(caption)) {
-    grid.draw(textGrob(label = caption[i], 
+    grid.draw(textGrob(label = caption[i],
                        x = 0.5 + nudge_x,
-                       y = (y - i * sep), 
-                       just = c("center","bottom"), 
+                       y = (y - i * sep),
+                       just = c("center","bottom"),
                        gp = gpar(fontsize = fontsize,
                                  cex = cex,
                                  fontfamily = fontfamily)))
   }
 }
 
+#' Title
+#'
+#' @param label
+#' @param draw
+#' @param layout
+#' @param fontsize
+#' @param cex
+#' @param fontfamily
+#' @param fontface
+#'
+#' @return
+#' @export
+#'
+#' @examples
 grid.slip <- function(label = "",
                       draw = TRUE,
                       layout = "portrait",
@@ -77,8 +122,8 @@ grid.slip <- function(label = "",
 ){
   sliptext <- textGrob(label = label,
                        rot = if_else(layout=="landscape",90,0),
-                       x = 0.5, 
-                       y = 0.5, 
+                       x = 0.5,
+                       y = 0.5,
                        just = c("center","center"),
                        gp = gpar(fontface = fontface,
                                  cex = cex,
@@ -93,6 +138,24 @@ grid.slip <- function(label = "",
 }
 
 
+#' Title
+#'
+#' @param top
+#' @param bottom
+#' @param left
+#' @param right
+#' @param title
+#' @param subtitle
+#' @param caption
+#' @param grid.caption.params
+#' @param watermark
+#' @param grid.watermark.params
+#' @param clear
+#'
+#' @return
+#' @export
+#'
+#' @examples
 grid.borders <- function(
     top = c(l = "", c = "", r = ""),
     bottom = c(l = "", c = "", r = ""),
@@ -106,7 +169,7 @@ grid.borders <- function(
     grid.watermark.params = list(),
     clear = FALSE
 ){
-  
+
   border.margin <- getOption("border.margin", 0.05)
   border.radius <- getOption("border.radius", 0.009)
   title.margin <- getOption("title.margin", 0.05)
@@ -118,83 +181,83 @@ grid.borders <- function(
   fontsize <- getOption("border.fontsize", 12)
   border.fontfamily <- getOption("border.fontfamily")
   default.fontfamily <- getOption("default.fontfamily")
-  
+
   if (clear && !dev.interactive() && !is.null(dev.list())) dev.off()
   box <- 1 - 2 * border.margin
-  
-  titlebox <- roundrectGrob(x = 0.5, 
-                            y = 1 - border.margin - title.margin, 
-                            width = title.width, 
-                            height = title.height, 
+
+  titlebox <- roundrectGrob(x = 0.5,
+                            y = 1 - border.margin - title.margin,
+                            width = title.width,
+                            height = title.height,
                             r = unit(title.radius, "snpc"),
                             just=c("center","top"),
                             gp = gpar(fill = NA))
-  borderbox <- roundrectGrob(x = 0.5, 
-                             y = 0.5, 
-                             width = box, 
-                             height = box, 
+  borderbox <- roundrectGrob(x = 0.5,
+                             y = 0.5,
+                             width = box,
+                             height = box,
                              r = unit(border.radius, "snpc"),
                              just = c("center", "center"),
                              gp = gpar(fill=NA, lwd=1))
-  
+
   bgp <- gpar(color="black", fontsize = fontsize, fontfamily = border.fontfamily)
-  
+
   tb.x <- c(border.margin, .5, box + border.margin)
   t.y <- 1 - (border.margin / 2)
   b.y <- border.margin / 2
   tb.x.just <- c("left","center","right")
-  
+
   lx <- (border.margin / 2)
   rx <- 1 - (border.margin / 2)
   lr.y <- c(border.margin, .5, box + border.margin)
   l.x.just <- c("left","center","right")
   r.x.just <- rev(l.x.just)
   lr.y.just <- "top"
-  
+
   grid.draw(titlebox)
   grid.draw(borderbox)
   for (i in seq_along(top)){
     grid.draw(textGrob(label = top[[i]],
-                       x = tb.x[i], 
-                       y = t.y, 
+                       x = tb.x[i],
+                       y = t.y,
                        just = c(tb.x.just[i],"center"),
                        gp = bgp))
   }
   for (i in seq_along(bottom)){
     grid.draw(textGrob(label = bottom[[i]],
-                       x = tb.x[i], 
-                       y = b.y, 
+                       x = tb.x[i],
+                       y = b.y,
                        just = c(tb.x.just[i],"center"),
                        gp = bgp))
   }
   for (i in seq_along(left)){
     grid.draw(textGrob(label = left[[i]],
-                       x = lx, 
-                       y = lr.y[i], 
+                       x = lx,
+                       y = lr.y[i],
                        rot = 90,
                        just = c(l.x.just[i],"center"),
                        gp = bgp))
   }
   for (i in seq_along(right)){
     grid.draw(textGrob(label = right[[i]],
-                       x = rx, 
-                       y = lr.y[i], 
+                       x = rx,
+                       y = lr.y[i],
                        rot = -90,
                        just = c(r.x.just[i],"center"),
                        gp = bgp))
   }
-  
+
   title.y <- (1 - border.margin - title.margin - (title.height / 2))
   if (!is.null(subtitle)) title.y <- title.y + title.sep
   subtitle.y <- (1 - border.margin - title.margin - (title.height / 2)) - 2*title.sep
-  
+
   if (!is.null(title)){
     grid.text(title,
               x = .5,
               y = title.y,
-              gp = gpar(fontfamily = default.fontfamily, 
-                        fontsize=title.fontsize, 
-                        cex=7/6, 
+              gp = gpar(fontfamily = default.fontfamily,
+                        fontsize=title.fontsize,
+                        cex=7/6,
                         fontface=getOption("title.fontface", "bold")),
               just = c("center","center"))
   }
@@ -202,9 +265,9 @@ grid.borders <- function(
     grid.text(subtitle,
               x=.5,
               y=subtitle.y,
-              gp = gpar(fontfamily = default.fontfamily, 
-                        fontsize=title.fontsize, 
-                        cex=1, 
+              gp = gpar(fontfamily = default.fontfamily,
+                        fontsize=title.fontsize,
+                        cex=1,
                         fontface=getOption("subtitle.fontface", "italic")),
               just = c("center","center"))
   }
